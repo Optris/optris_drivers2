@@ -5,6 +5,25 @@ Nodes have been tested with the version Dashing Diademata (short form: Dashing)
 
 Reference: https://index.ros.org/doc/ros2/Installation/
 
+## Installing IR Imager Direct SDK
+
+In order to successfully compile this package, the IR Imager Direct SDK for Optris cameras is needed.
+
+### **Installation Steps**
+1. Download the SDK from the official Optris website: [IR Imager Direct SDK](https://sdk.optris.com/downloads/)
+2. Install the downloaded package:
+  ```
+  dpkg -i libirimager-<version>-$(dpkg --print-architecture).deb
+  ```
+3. Connect your device and download the calibration files:
+```
+sudo ir_download_calibration
+```
+4. Generate the configuration file: 
+```
+ir_generate_configuration
+```
+5. Copy the printed XML text into a file.
 
 ## Environment setup
 ```
@@ -60,15 +79,3 @@ or compressed:
 ```
 $ ros2 topic bw /thermal_image_view/compressed
 ```
-
-## Installing IR Imager Direct SDK
-
-In order to successfully compile this package, the IR Imager Direct SDK for Optris cameras is needed.
-You can download it from http://ftp.evocortex.com/
-
-
-If you want to install the latest available version using rosdep, add a rosdep source by executing
-
-``sudo sh -c 'echo "yaml https://raw.githubusercontent.com/evocortex/optris_drivers2/master/libirimager.yaml " > /etc/ros/rosdep/sources.list.d/19-libirimager.list'``
-
-in a Linux terminal. For further information regarding rosdep, see http://wiki.ros.org/rosdep
