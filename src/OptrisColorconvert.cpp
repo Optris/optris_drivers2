@@ -60,7 +60,7 @@ namespace optris_drivers2
     {
       // GUID is 16 hex digits, which should be valid.
       // If not, use it for log messages anyway.
-      RCLCPP_WARN(this->get_logger(), "[%s] name not valid for camera_info_manger", camera_name);
+      RCLCPP_WARN(this->get_logger(), "[%s] name not valid for camera_info_manger", camera_name.c_str());
     }
 
     if (_camera_info_manager.validateURL(camera_info_url))

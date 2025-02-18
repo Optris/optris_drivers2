@@ -9,7 +9,7 @@ namespace optris_drivers2
 OptrisImager::OptrisImager(evo::IRDevice* dev, evo::IRDeviceParams params) : Node("optris_imager")
 {
 
-  RCLCPP_INFO(get_logger(), "Serial: %d", params.serial);
+  RCLCPP_INFO(get_logger(), "Serial: %lu", params.serial);
 
   _imager.init(&params, dev->getFrequency(), dev->getWidth(), dev->getHeight(), dev->controlledViaHID());
   _imager.setClient(this);
@@ -121,7 +121,7 @@ void OptrisImager::onThermalFrame(unsigned short* image, unsigned int w, unsigne
   RCLCPP_INFO(get_logger(), "onThermalFrame");
   memcpy(&_thermal_image.data[0], image, w * h * sizeof(*image));
 
-  _thermal_image.header.frame_id = "";
+  _thermal_image.header.frame_id = "thermal_image";
   _thermal_image.header.stamp = rclcpp::Node::now();
   _thermal_pub->publish(_thermal_image);
 

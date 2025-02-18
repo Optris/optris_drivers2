@@ -28,8 +28,10 @@ find_package(rosidl_default_generators REQUIRED)
 
 
 include_directories(
-  /usr/include/libirimager/
   include
+  ${image_transport_INCLUDE_DIRS}
+  ${camera_info_manager_INCLUDE_DIRS}
+  /usr/include/libirimager/
 )
 
 set(msg_files
@@ -52,11 +54,32 @@ ament_export_dependencies(rosidl_default_runtime)
 
 add_executable(optris_imager_node src/optris_imager_node.cpp src/OptrisImager.cpp)
 ament_target_dependencies(optris_imager_node rclcpp std_msgs std_srvs sensor_msgs image_transport camera_info_manager)
-rosidl_target_interfaces(optris_imager_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_typesupport_cpp")
+target_link_libraries(optris_imager_node "${cpp_typesupport_target}")
+
+
+
 
 add_executable(optris_colorconvert_node src/optris_colorconvert_node.cpp src/OptrisColorconvert.cpp)
 ament_target_dependencies(optris_colorconvert_node rclcpp std_msgs std_srvs sensor_msgs image_transport camera_info_manager)
-rosidl_target_interfaces(optris_colorconvert_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target_colorconvert "${PROJECT_NAME}" "rosidl_typesupport_cpp")
+target_link_libraries(optris_colorconvert_node "${cpp_typesupport_target_colorconvert}")
+
+ament_target_dependencies(optris_imager_node 
+  rclcpp
+  std_msgs
+  std_srvs
+  sensor_msgs
+  image_transport
+  camera_info_manager)
+
+ament_target_dependencies(optris_colorconvert_node 
+  rclcpp
+  std_msgs
+  std_srvs
+  sensor_msgs
+  image_transport
+  camera_info_manager)
 
 target_link_libraries(optris_imager_node 
   irimager

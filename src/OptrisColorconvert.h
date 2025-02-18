@@ -4,10 +4,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include <chrono>
 #include <thread>
-#include <image_transport/image_transport.h>
+#include <image_transport/image_transport.hpp>
 #include <sensor_msgs/msg/image.hpp>
 #include <sensor_msgs/msg/time_reference.hpp>
-#include <camera_info_manager/camera_info_manager.h>
+#include <camera_info_manager/camera_info_manager.hpp>
 #include <sensor_msgs/msg/camera_info.hpp>
 
 #include "libirimager/ImageBuilder.h"
