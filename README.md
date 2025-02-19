@@ -1,9 +1,7 @@
 # ROS2 wrapper for irDirectSDK
 
 ## Installation
-Nodes have been tested with the version Dashing Diademata (short form: Dashing)
-
-Reference: https://index.ros.org/doc/ros2/Installation/
+Nodes have been tested with the version [ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)
 
 ## Installing IR Imager Direct SDK
 
@@ -12,18 +10,17 @@ In order to successfully compile this package, the IR Imager Direct SDK for Optr
 ### **Installation Steps**
 1. Download the SDK from the official Optris website: [IR Imager Direct SDK](https://sdk.optris.com/downloads/)
 2. Install the downloaded package:
-  ```
+``` bash
   dpkg -i libirimager-<version>-$(dpkg --print-architecture).deb
-  ```
-3. Connect your device and download the calibration files:
 ```
+3. Connect your device and download the calibration files:
+``` bash
 sudo ir_download_calibration
 ```
 4. Generate the configuration file: 
+``` bash
+ir_generate_configuration > `ir_find_serial`.xml
 ```
-ir_generate_configuration
-```
-5. Copy the printed XML text into a file.
 
 ## Environment setup
 ```
